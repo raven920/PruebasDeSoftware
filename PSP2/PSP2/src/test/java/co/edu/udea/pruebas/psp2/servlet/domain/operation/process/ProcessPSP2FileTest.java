@@ -173,7 +173,7 @@ public class ProcessPSP2FileTest {
     }
     
     @Test
-    public void testGetDatosWellformed2() throws Exception {
+    public void testGetDatosMalformed2() throws Exception {
         System.out.println("getDatosWellformed2");
         
         String[] input = wellFormed2.split("\n");
@@ -184,9 +184,10 @@ public class ProcessPSP2FileTest {
         try{
             llcc = instance.getDatos(input);
         }catch(PSP2Exception e){
-            fail(e.getMessage());
+            //assert(true);
         }
-        assert(llcc.esVacia());
+        
+        assertEquals(llcc,null);
         
     }
 
