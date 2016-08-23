@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author raven
  */
 public class RegressionServletTest {
-	
+	/*
     @Before
     public void prepare() {
         setBaseUrl("http://localhost:8080/PSP2");
@@ -166,6 +166,6 @@ public class RegressionServletTest {
         assertTextPresent("not enough data");
         
     }
-    
+    */
     
 }
