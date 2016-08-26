@@ -92,32 +92,7 @@ public class RegressionServlet extends HttpServlet {
         
         
     }
-    
-    
-    private String fileError(String error){
-        StringBuilder sb = new StringBuilder();
-        sb.append("<!DOCTYPE html><html><head>");
-        sb.append("<title>Error</title>");
-        sb.append("</head><body>");
-        sb.append("<h1>Error</h1>");
-        sb.append("<p>").append(error).append("</p>");
-        sb.append("</body></html>");
-        return sb.toString();
-    }
-    
-    private String readData(Scanner s){
-        StringBuilder sb = new StringBuilder();
-        sb.append("<!DOCTYPE html><html><head>");
-        sb.append("<title>Éxito</title>");
-        sb.append("</head><body>");
-        sb.append("<h1>Datos Ingresados</h1>");
-        while(s.hasNext()){
-            sb.append("<p>"+s.nextLine()+"</p>");
-        }
-        sb.append("</body></html>");
-        return sb.toString();
-        
-    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

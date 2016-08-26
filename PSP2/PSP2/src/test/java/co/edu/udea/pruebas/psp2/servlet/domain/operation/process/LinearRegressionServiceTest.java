@@ -9,10 +9,7 @@ import co.edu.udea.pruebas.psp2.exception.PSP2Exception;
 import co.edu.udea.pruebas.psp2.servlet.domain.operation.process.impl.LinearRegressionServiceImpl;
 import co.edu.udea.pruebas.psp2.utils.llcc.Dupla;
 import co.edu.udea.pruebas.psp2.utils.llcc.ListaLigadaConCabeza;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,6 +22,7 @@ import static org.junit.Assert.*;
 public class LinearRegressionServiceTest {
     
     ListaLigadaConCabeza<Dupla<Double>> datosBien1;
+    
     ListaLigadaConCabeza<Dupla<Double>> sinDatos;
     
     public LinearRegressionServiceTest() {
@@ -45,6 +43,8 @@ public class LinearRegressionServiceTest {
         datosBien1.insertar(new Dupla<>(945d,1890d));
         datosBien1.insertar(new Dupla<>(368d,788d));
         datosBien1.insertar(new Dupla<>(961d,1601d));
+        
+        
     }
     
     @After
@@ -76,20 +76,17 @@ public class LinearRegressionServiceTest {
         }
         
     }
-//    @Test
-//    public void testNegativeData()   {
-//        boolean threwException = false;
-//        System.out.println("getLinearRegressionParameters");
-//
-//        LinearRegressionService instance = new LinearRegressionServiceImpl();
-//        
-//        try{
-//            double[] result = instance.getLinearRegressionParameters(datosBien1);
-//        }catch(PSP2Exception e){
-//            assertEquals(e.getMessage(), "Fail calculating square root.");
-//            threwException = true;
-//        }
-//        assert(threwException);
-//    }
+    
+    @Test
+    public void testDoubleData() throws Exception {
+        System.out.println("testDoubleData");
+        
+        LinearRegressionService instance = new LinearRegressionServiceImpl();
+        double[] expResult = new double[]{/*B0*/-22.55, /*B1*/1.7279, /*Rxy*/0.9545,  /*R2*/0.9111};
+        double[] result = instance.getLinearRegressionParameters(datosBien1);
+        double[] result2 = instance.getLinearRegressionParameters(datosBien1);
+        assertArrayEquals(expResult, result,0.01);
+        assertArrayEquals(expResult, result2,0.01);
+    }
     
 }

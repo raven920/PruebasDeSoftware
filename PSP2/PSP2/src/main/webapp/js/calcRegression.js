@@ -20,7 +20,8 @@ $(document).ready(function () {
            console.log(b1);
            console.log(xk);
            yk = b0 + (b1*xk);
-           $('#ysubk').text(yk);
+           $('#ysubk').text(Number(yk).toFixed(4));
+           
        }else{
            $('#ysubk').html('X<sub>k</sub> is invalid.');
        }

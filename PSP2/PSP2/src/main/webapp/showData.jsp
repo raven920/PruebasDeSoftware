@@ -1,4 +1,7 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@page import="co.edu.udea.pruebas.psp2.utils.llcc.Nodo"%>
 <%@page import="co.edu.udea.pruebas.psp2.utils.llcc.Dupla"%>
 <%@page import="co.edu.udea.pruebas.psp2.utils.llcc.ListaLigadaConCabeza"%>
@@ -90,16 +93,20 @@
                     <br>
                     <div class="row">
                         <div class="col s12 m3 center-align">
-                            <span class="val_header">β<sub>0</sub> = <span id="beta0"><%=resultado[0]%></span></span>
+                            <span class="val_header">β<sub>0</sub> = <span id="beta0"><fmt:formatNumber type="number" 
+            maxFractionDigits="4" value="${resultado[0]}" /></span></span>
                         </div>
                         <div class="col s12 m3 center-align">
-                            <span class="val_header">β<sub>1</sub> = <span id="beta1"><%=resultado[1]%></span></span>
+                            <span class="val_header">β<sub>1</sub> = <span id="beta1"><fmt:formatNumber type="number" 
+            maxFractionDigits="4" value="${resultado[1]}" /></span></span>
                         </div>
                         <div class="col s12 m3 center-align">
-                            <span class="val_header">r<sub>x,y</sub> = <span id="rsubxy"><%=resultado[2]%></span></span>
+                            <span class="val_header">r<sub>x,y</sub> = <span id="rsubxy"><fmt:formatNumber type="number" 
+            maxFractionDigits="4" value="${resultado[2]}" /></span></span>
                         </div>
                         <div class="col s12 m3 center-align">
-                            <span class="val_header">r<sup>2</sup> = <span id="rsub2"><%=resultado[3]%></span></span>
+                            <span class="val_header">r<sup>2</sup> = <span id="rsub2"><fmt:formatNumber type="number" 
+            maxFractionDigits="4" value="${resultado[3]}" /></span></span>
                         </div>
                     </div>
                     <div class="row">
