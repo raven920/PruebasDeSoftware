@@ -1,4 +1,10 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%
+
+    String resultado = (String) request.getAttribute("errorText");
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,20 +14,18 @@
 
         <script src="js/jquery-2.1.1.min.js"></script>
         <script src="js/materialize.js"></script>
-
+        <script src="js/calcRegression.js"></script>
 
         <!-- CSS  -->
         <link href="css/MaterialIcons.css" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
         <link href="css/settings.css" rel="stylesheet">
-        <script src="js/settings.js"></script>
-
     </head>
     <body>
         <header>
             <nav class="blue" role="navigation">
-                <div class="nav-wrapper container"><a id="logo-container" href="/PSP3" class="brand-logo">PSP3</a>
+                <div class="nav-wrapper container"><a id="logo-container" href="/PSP2" class="brand-logo">PSP3</a>
 
                     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
                 </div>
@@ -32,30 +36,14 @@
                 <div class="container">
                     <br><br>
                     <h1 class="header center orange-text">Relative Size Ranges</h1>
-                    <div class="row center">
-                        <h5 id="fileName" class="header col s12 light">Please select the text file containing the data.</h5>
-                    </div>
-                    <div class="row">
-                        <form action="RelativeSizeRangeServlet" method="post" enctype="multipart/form-data" >
-                            <div class="row">
-                                <div class="col offset-s3 s9 offset-m5 m7">
-                                    <div class="file-field input-field">
-                                        <div class="btn-large waves-effect waves-light orange">
-                                            <span>SELECT</span>
-                                            <input  type="file" name="dataFile">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col offset-s3 s9 offset-m5 m7">
-                                <input type="submit" class="btn-large orange" value="Upload" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                     <br><br>
-
+                    <div class="row center">
+                        <h5 class="header col s12 light" style="font-weight: bold;">Error:</h5>
+                    </div>
+                   
+                    <div class="row center">
+                        <h5 class="header col s12 light"><%=resultado%>.</h5>
+                    </div>
                 </div>
             </div>
         </main>
@@ -66,11 +54,11 @@
                         <h5 class="white-text">PSP 3</h5>
                         <p class="grey-text text-lighten-4">Desarrollado por Jazmín, Alejandra, Juan y Christian.</p>
                     </div>
-                    
+
                 </div>
-                
+
             </div>
-            
+
         </footer>
 
 
