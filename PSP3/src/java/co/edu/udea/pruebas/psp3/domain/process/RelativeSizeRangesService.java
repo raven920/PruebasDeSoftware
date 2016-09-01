@@ -13,5 +13,13 @@ import java.util.List;
  * @author raven
  */
 public interface RelativeSizeRangesService {
-    double[] calcRelativeSizeRanges(List<Double> data) throws PSPException;
+    void calcRelativeSizeRanges(List<Double> data) throws PSPException;
+    double[] getRelativeSizeRanges() throws PSPException;
+    double[] getLogarithmicRelativeSizeRanges() throws PSPException;
+    double getVariance();
+    double getStandardDeviation();
+    double[] getLnXi() throws PSPException;
+    double[] getSquaredAvgDiff() throws PSPException;
+    double getLnXiSum();
+    double getSumSquaredAvgDiff();
 }

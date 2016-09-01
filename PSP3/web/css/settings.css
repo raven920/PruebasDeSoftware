@@ -1,0 +1,20 @@
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+  
+  .val_header{
+      font-weight: bold;
+      font-style: italic;
+      font-size: large;
+  }
+  
+  .theader{
+      font-size: large;
+  }

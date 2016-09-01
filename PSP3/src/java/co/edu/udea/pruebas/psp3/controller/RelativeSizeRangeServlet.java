@@ -14,6 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import javax.servlet.http.Part;
  * @author raven
  */
 @WebServlet(name = "RelativeSizeRangeServlet", urlPatterns = {"/RelativeSizeRangeServlet"})
+@MultipartConfig
 public class RelativeSizeRangeServlet extends HttpServlet {
 
     
@@ -35,44 +37,54 @@ public class RelativeSizeRangeServlet extends HttpServlet {
     
     @Inject
     RelativeSizeRangesService rsrs;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         RequestDispatcher rq = null;
         Part filePart = null;
         
-        double[] resultado;
+        double[] lnxi, lnxiavgsq, logRSR, RSR;
+        double lnxiSum, lnxiavgsqSum, var, std;
         String info;
         boolean malformedRequest = false;
         String errMsg = "";
         
         String[] encabezados;
         List<Double> datos;
+        List<String> encabezadosDatos;
+        System.out.println("OIE ZYYYY");
         try{
             filePart = request.getPart("dataFile");
             info = pspfp.recuperarInfo(filePart);
             pspfp.procesarInfo(info);
             encabezados = pspfp.getEncabezados();
             datos = pspfp.getDatos();
-            
+            encabezadosDatos = pspfp.getEncabezadosDatos();
             /**
              * Aquí se calculan los valores de la tabla de tamaño relativo y se retornan 
              * 
              */
-            resultado = rsrs.calcRelativeSizeRanges(datos);
-            
+            rsrs.calcRelativeSizeRanges(datos);
+            lnxi = rsrs.getLnXi();
+            lnxiavgsq = rsrs.getSquaredAvgDiff();
+            lnxiSum = rsrs.getLnXiSum();
+            lnxiavgsqSum =rsrs.getSumSquaredAvgDiff();
+            var = rsrs.getVariance();
+            std = rsrs.getStandardDeviation();
+            logRSR = rsrs.getLogarithmicRelativeSizeRanges();
+            RSR = rsrs.getRelativeSizeRanges();
             request.setAttribute("encabezado", encabezados);
             request.setAttribute("datos", datos);
-            request.setAttribute("resultado", resultado);
+            request.setAttribute("encabezadosDatos", encabezadosDatos);
+            request.setAttribute("lnxi", lnxi);
+            request.setAttribute("lnxiavgsq", lnxiavgsq);
+            request.setAttribute("lnxiSum", lnxiSum);
+            request.setAttribute("lnxiavgsqSum", lnxiavgsqSum);
+            request.setAttribute("variance", var);
+            request.setAttribute("std", std);
+            request.setAttribute("logRSR", logRSR);
+            request.setAttribute("RSR", RSR);
+            
             rq = request.getRequestDispatcher("/showData.jsp");
             
         }catch(PSPException e){

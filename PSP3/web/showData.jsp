@@ -1,4 +1,5 @@
 
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -7,8 +8,18 @@
 
 <%
     List<Double> datos = (List<Double>) request.getAttribute("datos");
+    List<String> encabezadosDatos = (List<String>) request.getAttribute("encabezadosDatos");
     String[] encabezado = (String[]) request.getAttribute("encabezado");
-    double[] resultado = (double[]) request.getAttribute("resultado");
+    double[] lnxi = (double[]) request.getAttribute("lnxi");
+    double[] RSR = (double[]) request.getAttribute("RSR");
+    double[] logRSR = (double[]) request.getAttribute("logRSR");
+    double[] lnxiavgsq = (double[]) request.getAttribute("lnxiavgsq");
+    double lnxiavgsqSum = (Double) request.getAttribute("lnxiavgsqSum");
+    double lnxiSum = (Double) request.getAttribute("lnxiSum");
+    double std = (Double) request.getAttribute("std");
+    double variance = (Double) request.getAttribute("variance");
+    NumberFormat nf = NumberFormat.getInstance();
+    nf.setMaximumFractionDigits(4);
     
 %>
 <!DOCTYPE html>
@@ -47,78 +58,126 @@
                         <table class="bordered responsive-table">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>
+                                        <span class="theader"><%=encabezado[0]%></span>
+                                    </th>
+                                    <th>
+                                        <span class="theader"><%=encabezado[1]%>
                                         <%
-                                            for (int i = 1; i <= datos.getTamano(); i++) {
-                                        %>
-                                    <th><%=i%></th>
-                                        <%
+                                            if(encabezado.length == 3){
+                                                %>
+                                                <%=" / "+encabezado[2]%>
+                                                <%
                                             }
                                         %>
+                                        ( x<sub>i</sub> )
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="theader" style="font-style: italic;">
+                                            ln(x<sub>i</sub>)
+                                        </span>
+                                    </th>
+                                    <th
+                                        <span class="theader" style="font-style: italic;"> 
+                                            (ln(x<sub>i</sub>)-avg)<sup>2</sup>
+                                        </span>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <% for(int i = 0; i < datos.size(); i++){
+                                %>
                                 <tr>
-                                    <th><%=encabezado.getObjeto1()%></th>
-                                        <%
-                                            aux = datos.getPrimero();
-                                            while (!datos.finDeRecorrido(aux)) {
-
-                                        %>
-                                    <th><%=aux.getObjeto().getObjeto1()%></th>
-                                        <%
-                                                aux = aux.getSiguiente();
-                                            }
-                                        %>
+                                    <th>
+                                        <%=encabezadosDatos.get(i)%>
+                                    </th>
+                                    <td>
+                                        <%=nf.format(datos.get(i))%>
+                                    </td>
+                                    <td>
+                                        <%=nf.format(lnxi[i])%>
+                                    </td>
+                                    <td>
+                                        <%=nf.format(lnxiavgsq[i])%>
+                                    </td>
                                 </tr>
+                                <%
+                                }
+                                %>
                                 <tr>
-                                    <th><%=encabezado.getObjeto2()%></th>
-                                        <%
-                                            aux = datos.getPrimero();
-                                            while (!datos.finDeRecorrido(aux)) {
-
-                                        %>
-                                    <th><%=aux.getObjeto().getObjeto2()%></th>
-                                        <%
-                                                aux = aux.getSiguiente();
-                                            }
-                                        %>
+                                    <th>
+                                        Total
+                                    </th>
+                                    <td></td>
+                                    <td><%=nf.format(lnxiSum)%></td>
+                                    <td><%=nf.format(lnxiavgsqSum)%></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col s12 m3 center-align">
-                            <span class="val_header">β<sub>0</sub> = <span id="beta0"><fmt:formatNumber type="number" 
-            maxFractionDigits="4" value="${resultado[0]}" /></span></span>
+                        <div class="col s12 m6 center-align">
+                            <span class="val_header">σ = <span id="beta0"><%=nf.format(std)%></span></span>
                         </div>
-                        <div class="col s12 m3 center-align">
-                            <span class="val_header">β<sub>1</sub> = <span id="beta1"><fmt:formatNumber type="number" 
-            maxFractionDigits="4" value="${resultado[1]}" /></span></span>
+                        <div class="col s12 m6 center-align">
+                            <span class="val_header">σ<sup>2</sup> = <span id="beta1"><%=nf.format(variance)%></span></span>
                         </div>
-                        <div class="col s12 m3 center-align">
-                            <span class="val_header">r<sub>x,y</sub> = <span id="rsubxy"><fmt:formatNumber type="number" 
-            maxFractionDigits="4" value="${resultado[2]}" /></span></span>
-                        </div>
-                        <div class="col s12 m3 center-align">
-                            <span class="val_header">r<sup>2</sup> = <span id="rsub2"><fmt:formatNumber type="number" 
-            maxFractionDigits="4" value="${resultado[3]}" /></span></span>
-                        </div>
+                        
                     </div>
-                    <div class="row">
-                        <div class="col offset-m5 s12">
-                            <div class="input-field col m3 s12">
-                                <input step="any" id="xsubk" type="number" class="validate">
-                                <label for="xsubk" class="val_header">Insert X<sub>k</sub></label>
-                            </div>
-                        </div>
-                    </div>
+                        
                         <br>
-                        <div class="row center">
-                            <span class="val_header">Y<sub>k</sub> = <span id="ysubk">Insert X<sub>k</sub> first.</span></span>
-                        </div>
-
+                        
+                        <br>
+                    <div class="row">
+                        <table class="bordered responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="theader"></span>
+                                    </th>
+                                    <th>
+                                        <span class="theader">Very Small</span>
+                                    </th>
+                                    <th>
+                                        <span class="theader">Small </span>
+                                    </th>
+                                    <th>
+                                        <span class="theader">Medium </span>
+                                    </th>
+                                    <th>
+                                        <span class="theader">Large </span>
+                                    </th>
+                                    <th>
+                                        <span class="theader">Very Large</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <th>Natural Logarithm</th>
+                                    <%
+                                    for(int i = 0; i < logRSR.length; i++){
+                                    %>
+                                    <td><%=nf.format(logRSR[i])%></td>
+                                    <%}%>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Final Result
+                                    </th>
+                                    <%
+                                    for(int i = 0; i < RSR.length; i++){
+                                    %>
+                                    <td><%=nf.format(RSR[i])%></td>
+                                    <%}%>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 </div>
             </div>
         </main>

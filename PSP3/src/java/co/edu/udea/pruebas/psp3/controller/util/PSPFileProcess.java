@@ -18,4 +18,5 @@ public interface PSPFileProcess {
     void procesarInfo(String entrada) throws PSPException;
     String[] getEncabezados();
     List<Double> getDatos();
+    List<String> getEncabezadosDatos();
 }
