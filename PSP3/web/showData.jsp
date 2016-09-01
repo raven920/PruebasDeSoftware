@@ -41,7 +41,7 @@
     </head>
     <body>
         <header>
-            <nav class="blue" role="navigation">
+            <nav class="teal lighten-2" role="navigation">
                 <div class="nav-wrapper container"><a id="logo-container" href="/PSP3" class="brand-logo">PSP3</a>
 
                     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -52,7 +52,7 @@
             <div class="section no-pad-bot" id="index-banner">
                 <div class="container">
                     <br><br>
-                    <h1 class="header center orange-text">Relative Size Ranges</h1>
+                    <h1 class="header center red-text text-lighten-1">Relative Size Ranges</h1>
 
                     <div class="row">
                         <table class="bordered responsive-table">
@@ -130,6 +130,7 @@
                         <br>
                         
                         <br>
+                        
                     <div class="row">
                         <table class="bordered responsive-table">
                             <thead>
@@ -181,7 +182,7 @@
                 </div>
             </div>
         </main>
-        <footer class="page-footer orange">
+        <footer class="page-footer red lighten-1">
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">
