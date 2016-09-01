@@ -42,7 +42,7 @@
     <body>
         <header>
             <nav class="blue" role="navigation">
-                <div class="nav-wrapper container"><a id="logo-container" href="/PSP2" class="brand-logo">PSP3</a>
+                <div class="nav-wrapper container"><a id="logo-container" href="/PSP3" class="brand-logo">PSP3</a>
 
                     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
                 </div>

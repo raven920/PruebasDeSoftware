@@ -26,23 +26,6 @@ public class PSPFileProcessImpl implements PSPFileProcess{
     private List<Double> datos;
     private List<String> tituloDatos;
 
-    @Override
-    public List<Double> getDatos() {
-        return datos;
-    }
-
-    @Override
-    public String[] getEncabezados() {
-        return encabezados;
-    }
-
-    @Override
-    public List<String> getEncabezadosDatos() {
-        return tituloDatos;
-    }
-    
-    
-    
     
     @Override
     public String recuperarInfo(Part filePart) throws PSPException {
@@ -74,14 +57,12 @@ public class PSPFileProcessImpl implements PSPFileProcess{
         try{
             encabezados = splittedEntrada[0].split(",");
         }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("WTF1");
             throw new PSPException("Malformed file");
         }
         try {
             for (int i = 1; i < splittedEntrada.length; i++) {
                 aux = splittedEntrada[i].split(",");
                 if(aux.length != encabezados.length){
-                    System.out.println("WTF2");
                     throw new PSPException("Malformed data");
                 }
                 if(aux.length == 2){
@@ -90,15 +71,29 @@ public class PSPFileProcessImpl implements PSPFileProcess{
                     auxDouble = Double.parseDouble(aux[1])/Double.parseDouble(aux[2]);
                     datos.add(auxDouble);
                 }else{
-                    System.out.println("WTF3");
                     throw new PSPException("Malformed data");
                 }
                 tituloDatos.add(aux[0]);
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println("WTF4");
             throw new PSPException("Malformed data");
         }
     }
     
+    
+    
+    @Override
+    public List<Double> getDatos() {
+        return datos;
+    }
+
+    @Override
+    public String[] getEncabezados() {
+        return encabezados;
+    }
+
+    @Override
+    public List<String> getEncabezadosDatos() {
+        return tituloDatos;
+    }
 }

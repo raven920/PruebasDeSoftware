@@ -9,7 +9,6 @@ import co.edu.udea.pruebas.psp3.controller.util.PSPFileProcess;
 import co.edu.udea.pruebas.psp3.domain.process.RelativeSizeRangesService;
 import co.edu.udea.pruebas.psp3.exception.PSPException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
