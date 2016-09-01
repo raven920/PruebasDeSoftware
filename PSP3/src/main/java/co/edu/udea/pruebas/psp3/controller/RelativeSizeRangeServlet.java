@@ -51,7 +51,7 @@ public class RelativeSizeRangeServlet extends HttpServlet {
         String[] encabezados;
         List<Double> datos;
         List<String> encabezadosDatos;
-        System.out.println("OIE ZYYYY");
+        
         try{
             filePart = request.getPart("dataFile");
             info = pspfp.recuperarInfo(filePart);
